@@ -78,20 +78,14 @@
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            background: linear-gradient(45deg, #6366f1, #ec4899);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 42px;
-            font-weight: bold;
-            color: white;
+            object-fit: cover;
             box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
             border: 3px solid rgba(255, 255, 255, 0.1);
             transition: transform 0.3s ease;
         }
 
         .avatar-container:hover .avatar {
-            transform: scale(1.05) rotate(5deg);
+            transform: scale(1.05) rotate(3deg);
         }
 
         /* Текст */
@@ -149,7 +143,6 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
-        /* Иконки встроенные через SVG */
         .icon {
             width: 20px;
             height: 20px;
@@ -172,8 +165,8 @@
 
     <div class="card">
         <div class="avatar-container">
-            <!-- Можно заменить на фото, заменив весь тег div на <img src="твой-софт.jpg" class="avatar"> -->
-            <div class="avatar">C</div>
+            <!-- Новая плачущая аватарка из файла 1000013238.png -->
+            <img src="1000013238.png" alt="c4elovek avatar" class="avatar">
         </div>
 
         <h1>c4elovek</h1>
@@ -184,12 +177,12 @@
         </p>
 
         <div class="links-container">
-            <!-- Ссылка на Telegram (Замени ТГ_НИК на свой) -->
-            <a href="https://t.me/c4elovek" target="_blank" class="link-item">
+            <!-- Ссылка на Telegram c4alovek -->
+            <a href="https://t.me/c4alovek" target="_blank" class="link-item">
                 <svg class="icon" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.7-2.46 2.75-2.67.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.24-.02-.1.02-1.69 1.07-4.77 3.14-.45.31-.86.46-1.22.45-.4-.01-1.17-.23-1.74-.41-.7-.23-1.25-.35-1.2-.74.03-.2.3-.41.82-.62 3.2-1.39 5.34-2.31 6.42-2.76 3.07-1.28 3.71-1.5 4.13-1.51.09 0 .3.02.44.14.12.1.15.24.16.34.01.06.02.21 0 .34z"/>
                 </svg>
-                Telegram
+                Telegram канал / Личка
             </a>
 
             <!-- Ссылка на GitHub -->
@@ -199,6 +192,15 @@
                 </svg>
                 Мой GitHub профиль
             </a>
+
+            <!-- Кнопка Discord со специальной иконкой -->
+            <a href="https://discord.com" target="_blank" class="link-item">
+                <svg class="icon" viewBox="0 0 24 24">
+                    <path d="M19.27 4.73a11.12 11.12 0 0 0-2.74-1A13.43 13.43 0 0 0 16 4.7a10.7 10.7 0 0 0-3.2 0 13.43 13.43 0 0 0-.53-1 11.12 11.12 0 0 0-2.74 1A11.33 11.33 0 0 0 7.3 18.06a11.75 11.75 0 0 0 3.23 1.63 15.3 15.3 0 0 0 .69-1.12 7.72 7.72 0 0 1-1.12-.53 4.41 4.41 0 0 0 .23-.18 8.16 8.16 0 0 0 3.37.52 8.16 8.16 0 0 0 3.37-.52c.08.06.16.12.23.18a7.72 7.72 0 0 1-1.12.53 15.3 15.3 0 0 0 .69 1.12 11.75 11.75 0 0 0 3.23-1.63 11.33 11.33 0 0 0-2.22-13.33zM9.07 14.12c-.65 0-1.18-.6-1.18-1.33s.52-1.33 1.18-1.33 1.18.6 1.18 1.33-.52 1.33-1.18 1.33zm5.86 0c-.65 0-1.18-.6-1.18-1.33s.52-1.33 1.18-1.33 1.18.6 1.18 1.33-.53 1.33-1.18 1.33z"/>
+                </svg>
+                Discord: _c4elovek_
+            </a>
+        </div>
 
         <div class="footer">
             © 2026 c4elovek.online
