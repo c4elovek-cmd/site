@@ -13,8 +13,9 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
-            color: #f8fafc;
+            /* Глубокий монохромный жидкий градиент */
+            background: linear-gradient(135deg, #0a0a0a 0%, #161616 50%, #020202 100%);
+            color: #ffffff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -23,54 +24,60 @@
             overflow-x: hidden;
         }
 
-        /* Фоновые декоративные элементы */
+        /* Жидкие стеклянные блики на фоне */
         .bg-glow {
             position: absolute;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0,0,0,0) 70%);
-            top: 10%;
-            left: 10%;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, rgba(0,0,0,0) 70%);
+            top: -10%;
+            left: -10%;
             z-index: 1;
             pointer-events: none;
+            filter: blur(40px);
         }
         .bg-glow-2 {
             position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, rgba(0,0,0,0) 70%);
-            bottom: 10%;
-            right: 10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, rgba(0,0,0,0) 70%);
+            bottom: -10%;
+            right: -10%;
             z-index: 1;
             pointer-events: none;
+            filter: blur(50px);
         }
 
-        /* Основная карточка */
+        /* Карточка "Жидкое стекло" */
         .card {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            /* Четкая стеклянная грань */
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 28px;
             padding: 40px 30px;
             width: 100%;
             max-width: 420px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            /* Многослойная глубокая тень для объема */
+            box-shadow: 
+                0 4px 30px rgba(0, 0, 0, 0.4),
+                inset 0 1px 2px rgba(255, 255, 255, 0.15);
             z-index: 2;
-            animation: fadeIn 0.8s ease-out;
+            animation: glassAppear 1s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes glassAppear {
+            from { opacity: 0; transform: scale(0.95) translateY(15px); filter: blur(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
         }
 
         /* Аватар */
         .avatar-container {
             position: relative;
-            width: 110px;
-            height: 110px;
+            width: 115px;
+            height: 115px;
             margin: 0 auto 24px;
         }
 
@@ -79,41 +86,44 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .avatar-container:hover .avatar {
-            transform: scale(1.05) rotate(3deg);
+            transform: scale(1.04);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
         }
 
         /* Текст */
         h1 {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             letter-spacing: -0.5px;
-            background: linear-gradient(45deg, #fff 60%, #cbd5e1);
+            background: linear-gradient(180deg, #ffffff 0%, #b3b3b3 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .username {
-            font-size: 14px;
-            color: #818cf8;
+            font-size: 13px;
+            color: #8c8c8c;
             font-weight: 500;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
         }
 
         .bio {
-            font-size: 15px;
-            color: #94a3b8;
+            font-size: 14.5px;
+            color: #cccccc;
             line-height: 1.6;
             margin-bottom: 32px;
         }
 
-        /* Ссылки / Кнопки */
+        /* Ссылки (Кнопки) */
         .links-container {
             display: flex;
             flex-direction: column;
@@ -125,22 +135,25 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            padding: 14px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 14px;
-            color: #f1f5f9;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            color: #ffffff;
             text-decoration: none;
             font-size: 15px;
             font-weight: 500;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Плавная анимация изменения состояния (эффект ртути) */
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
+        /* Эффект инверсии при наведении */
         .link-item:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(255, 255, 255, 0.2);
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.08);
         }
 
         .icon {
@@ -149,12 +162,31 @@
             fill: currentColor;
         }
 
+        /* Контейнер для плеера SoundCloud */
+        .player-wrapper {
+            margin-top: 28px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: rgba(0, 0, 0, 0.2);
+            height: 120px; /* Слегка ужали высоту для компактности */
+            position: relative;
+        }
+
+        .player-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         /* Подвал */
         .footer {
             margin-top: 32px;
-            font-size: 12px;
-            color: #64748b;
-            letter-spacing: 0.5px;
+            font-size: 11px;
+            color: #555555;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -165,7 +197,6 @@
 
     <div class="card">
         <div class="avatar-container">
-            <!-- Новая плачущая аватарка из файла 1000013238.png -->
             <img src="avatar.png" alt="c4elovek avatar" class="avatar">
         </div>
 
@@ -177,7 +208,7 @@
         </p>
 
         <div class="links-container">
-            <!-- Ссылка на Telegram c4alovek -->
+            <!-- Telegram -->
             <a href="https://t.me/c4alovek" target="_blank" class="link-item">
                 <svg class="icon" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.7-2.46 2.75-2.67.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.24-.02-.1.02-1.69 1.07-4.77 3.14-.45.31-.86.46-1.22.45-.4-.01-1.17-.23-1.74-.41-.7-.23-1.25-.35-1.2-.74.03-.2.3-.41.82-.62 3.2-1.39 5.34-2.31 6.42-2.76 3.07-1.28 3.71-1.5 4.13-1.51.09 0 .3.02.44.14.12.1.15.24.16.34.01.06.02.21 0 .34z"/>
@@ -185,7 +216,7 @@
                 Telegram канал / Личка
             </a>
 
-            <!-- Ссылка на GitHub -->
+            <!-- GitHub -->
             <a href="https://github.com/c4elovek-cmd" target="_blank" class="link-item">
                 <svg class="icon" viewBox="0 0 24 24">
                     <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
@@ -193,13 +224,19 @@
                 Мой GitHub профиль
             </a>
 
-            <!-- Кнопка Discord со специальной иконкой -->
+            <!-- Discord -->
             <a href="https://discord.com" target="_blank" class="link-item">
                 <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M19.27 4.73a11.12 11.12 0 0 0-2.74-1A13.43 13.43 0 0 0 16 4.7a10.7 10.7 0 0 0-3.2 0 13.43 13.43 0 0 0-.53-1 11.12 11.12 0 0 0-2.74 1A11.33 11.33 0 0 0 7.3 18.06a11.75 11.75 0 0 0 3.23 1.63 15.3 15.3 0 0 0 .69-1.12 7.72 7.72 0 0 1-1.12-.53 4.41 4.41 0 0 0 .23-.18 8.16 8.16 0 0 0 3.37.52 8.16 8.16 0 0 0 3.37-.52c.08.06.16.12.23.18a7.72 7.72 0 0 1-1.12.53 15.3 15.3 0 0 0 .69 1.12 11.75 11.75 0 0 0 3.23-1.63 11.33 11.33 0 0 0-2.22-13.33zM9.07 14.12c-.65 0-1.18-.6-1.18-1.33s.52-1.33 1.18-1.33 1.18.6 1.18 1.33-.52 1.33-1.18 1.33zm5.86 0c-.65 0-1.18-.6-1.18-1.33s.52-1.33 1.18-1.33 1.18.6 1.18 1.33-.53 1.33-1.18 1.33z"/>
+                    <path d="M19.27 4.73a11.12 11.12 0 0 0-2.74-1A13.43 13.43 0 0 0 16 4.7a10.7 10.7 0 0 0-3.2 0 13.43 13.43 0 0 0-.53-1 11.12 11.12 0 0 0-2.74 1A11.33 11.33 0 0 0 7.3 18.06a11.75 11.75 0 0 0 3.23 1.63 15.3 15.3 0 0 0 .69-1.12 7.72 7.72 0 0 1-1.12-.53 4.41 4.41 0 0 0 .23-.18 8.16 8.16 0 0 0 3.37.52 8.16 8.16 0 0 0 3.37-.52c.08.06.16.12.23.18a7.72 7.72 0 0 1-1.12-.53 15.3 15.3 0 0 0 .69 1.12 11.75 11.75 0 0 0 3.23-1.63 11.33 11.33 0 0 0-2.22-13.33zM9.07 14.12c-.65 0-1.18-.6-1.18-1.33s.52-1.33 1.18-1.33 1.18.6 1.18 1.33-.52 1.33-1.18 1.33zm5.86 0c-.65 0-1.18-.6-1.18-1.33s.52-1.33 1.18-1.33 1.18.6 1.18 1.33-.53 1.33-1.18 1.33z"/>
                 </svg>
                 Discord: _c4elovek_
             </a>
+        </div>
+
+        <!-- Контейнер с твоим плейлистом SoundCloud -->
+        <div class="player-wrapper">
+            <!-- Цвет плеера изменен на белый (%23ffffff), чтобы вписаться в тему -->
+            <iframe scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2348736278&color=%23ffffff&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
         </div>
 
         <div class="footer">
