@@ -13,14 +13,14 @@
         }
 
         body {
-            /* Глубокий монохромный жидкий градиент */
             background: linear-gradient(135deg, #0a0a0a 0%, #161616 50%, #020202 100%);
             color: #ffffff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            /* Увеличили отступ снизу, чтобы плеер не перекрывал контент */
+            padding: 20px 20px 110px 20px;
             overflow-x: hidden;
         }
 
@@ -53,14 +53,12 @@
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
-            /* Четкая стеклянная грань */
             border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 28px;
             padding: 40px 30px;
             width: 100%;
             max-width: 420px;
             text-align: center;
-            /* Многослойная глубокая тень для объема */
             box-shadow: 
                 0 4px 30px rgba(0, 0, 0, 0.4),
                 inset 0 1px 2px rgba(255, 255, 255, 0.15);
@@ -143,11 +141,9 @@
             text-decoration: none;
             font-size: 15px;
             font-weight: 500;
-            /* Плавная анимация изменения состояния (эффект ртути) */
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* Эффект инверсии при наведении */
         .link-item:hover {
             background: #ffffff;
             color: #000000;
@@ -162,24 +158,6 @@
             fill: currentColor;
         }
 
-        /* Контейнер для плеера SoundCloud */
-        .player-wrapper {
-            margin-top: 28px;
-            border-radius: 18px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            background: rgba(0, 0, 0, 0.2);
-            height: 120px; /* Слегка ужали высоту для компактности */
-            position: relative;
-        }
-
-        .player-wrapper iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
         /* Подвал */
         .footer {
             margin-top: 32px;
@@ -187,6 +165,113 @@
             color: #555555;
             letter-spacing: 1px;
             text-transform: uppercase;
+        }
+
+        /* СТИЛЬ ЗАКРЕПЛЕННОГО ПЛЕЕРА СНИЗУ */
+        .bottom-player {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            z-index: 999;
+            animation: playerSlideUp 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes playerSlideUp {
+            from { transform: translate(-50%, 100px); opacity: 0; }
+            to { transform: translate(-50%, 0); opacity: 1; }
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .play-pause-btn {
+            background: #ffffff;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #000000;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        .play-pause-btn:hover {
+            transform: scale(1.06);
+            background: #e6e6e6;
+        }
+
+        .play-pause-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .track-meta {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .track-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: -0.3px;
+        }
+
+        .track-status {
+            font-size: 11px;
+            color: #8c8c8c;
+            margin-top: 1px;
+        }
+
+        /* Анимированный эквалайзер */
+        .equalizer {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            width: 18px;
+            height: 16px;
+        }
+
+        .eq-bar {
+            width: 3px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            transform-origin: bottom;
+            animation: bounce 0.6s ease-in-out infinite alternate;
+            animation-play-state: paused; /* По умолчанию стоит на паузе */
+        }
+
+        .equalizer.playing .eq-bar {
+            animation-play-state: running; /* Запускается при игре */
+        }
+
+        .eq-bar:nth-child(1) { animation-duration: 0.4s; }
+        .eq-bar:nth-child(2) { animation-duration: 0.7s; }
+        .eq-bar:nth-child(3) { animation-duration: 0.5s; }
+
+        @keyframes bounce {
+            0% { transform: scaleY(0.1); }
+            100% { transform: scaleY(1); }
         }
     </style>
 </head>
@@ -233,16 +318,83 @@
             </a>
         </div>
 
-        <!-- Контейнер с твоим плейлистом SoundCloud -->
-        <div class="player-wrapper">
-            <!-- Цвет плеера изменен на белый (%23ffffff), чтобы вписаться в тему -->
-            <iframe scrolling="no" frameborder="no" allow="autoplay; encrypted-media" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2348736278&color=%23ffffff&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
-        </div>
-
         <div class="footer">
             © 2026 c4elovek.online
         </div>
     </div>
+
+    <!-- ТЕГ АУДИО (Грузит твою песню) -->
+    <audio id="bg-music" src="song.mp3" loop></audio>
+
+    <!-- ПАНЕЛЬ КАСТОМНОГО ПЛЕЕРА СНИЗУ ЭКРАНА -->
+    <div class="bottom-player">
+        <div class="player-controls">
+            <button id="play-btn" class="play-pause-btn" title="Play">
+                <!-- Иконка Play (треугольник) -->
+                <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <!-- Иконка Pause (две полоски, скрыта изначально) -->
+                <svg id="icon-pause" viewBox="0 0 24 24" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <div class="track-meta">
+                <span class="track-name">pupsies misery</span>
+                <span id="player-status" class="track-status">нажмите Play</span>
+            </div>
+        </div>
+        
+        <!-- Анимация волны звука -->
+        <div id="eq" class="equalizer">
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+            <div class="eq-bar"></div>
+        </div>
+    </div>
+
+    <!-- СКРИПТ УПРАВЛЕНИЯ ПЛЕЕРОМ -->
+    <script>
+        const audio = document.getElementById('bg-music');
+        const playBtn = document.getElementById('play-btn');
+        const iconPlay = document.getElementById('icon-play');
+        const iconPause = document.getElementById('icon-pause');
+        const statusText = document.getElementById('player-status');
+        const eq = document.getElementById('eq');
+
+        // Функция переключения воспроизведения
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    iconPlay.style.display = 'none';
+                    iconPause.style.display = 'block';
+                    statusText.innerText = 'сейчас играет';
+                    eq.classList.add('playing');
+                }).catch(err => {
+                    console.log("Автозапуск заблокирован браузером. Требуется клик.");
+                });
+            } else {
+                audio.pause();
+                iconPlay.style.display = 'block';
+                iconPause.style.display = 'none';
+                statusText.innerText = 'на паузе';
+                eq.classList.remove('playing');
+            }
+        }
+
+        playBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Чтобы не срабатывал клик по body
+            togglePlay();
+        });
+
+        // Обход блокировки звука: клик в любое место экрана запустит песню (однократно)
+        window.addEventListener('click', () => {
+            if (audio.paused && audio.currentTime === 0) {
+                audio.play().then(() => {
+                    iconPlay.style.display = 'none';
+                    iconPause.style.display = 'block';
+                    statusText.innerText = 'сейчас играет';
+                    eq.classList.add('playing');
+                }).catch(() => {});
+            }
+        }, { once: true });
+    </script>
 
 </body>
 </html>
