@@ -21,6 +21,7 @@
             align-items: center;
             padding: 20px 20px 110px 20px;
             overflow-x: hidden;
+            position: relative;
         }
 
         /* Жидкие стеклянные блики на фоне */
@@ -166,15 +167,15 @@
             text-transform: uppercase;
         }
 
-        /* ИСПРАВЛЕННЫЙ СТИЛЬ СДВОЕННОГО ЦЕНТРИРОВАНИЯ ПЛЕЕРА */
+        /* Идеальное фиксированное центрирование плеера */
         .bottom-player {
             position: fixed;
             bottom: 20px;
             left: 0;
             right: 0;
-            margin: 0 auto; /* Идеальное выравнивание по центру экрана без багов */
+            margin: 0 auto;
             width: calc(100% - 40px);
-            max-width: 420px; /* Ровно по ширине твоей карточки */
+            max-width: 420px;
             background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -361,7 +362,7 @@
                     statusText.innerText = 'сейчас играет';
                     eq.classList.add('playing');
                 }).catch(err => {
-                    console.log("Автозапуск заблокирован. Требуется клик.");
+                    console.log("Автозапуск заблокирован.");
                 });
             } else {
                 audio.pause();
@@ -377,296 +378,6 @@
             togglePlay();
         });
 
-        window.addEventListener('click', () => {
-            if (audio.paused && audio.currentTime === 0) {
-                audio.play().then(() => {
-                    iconPlay.style.display = 'none';
-                    iconPause.style.display = 'block';
-                    statusText.innerText = 'сейчас играет';
-                    eq.classList.add('playing');
-                }).catch(() => {});
-            }
-        }, { once: true });
-    </script>
-
-</body>
-</html>
-color: #8c8c8c;
-            font-weight: 500;
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
-        }
-
-        .bio {
-            font-size: 14.5px;
-            color: #cccccc;
-            line-height: 1.6;
-            margin-bottom: 32px;
-        }
-
-        /* Ссылки (Кнопки) */
-        .links-container {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .link-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 15px 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        .link-item:hover {
-            background: #ffffff;
-            color: #000000;
-            border-color: #ffffff;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.08);
-        }
-
-        .icon {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
-        /* Подвал */
-        .footer {
-            margin-top: 32px;
-            font-size: 11px;
-            color: #555555;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        /* СТИЛЬ ЗАКРЕПЛЕННОГО ПЛЕЕРА СНИЗУ */
-        .bottom-player {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 40px);
-            max-width: 420px;
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.1);
-            z-index: 999;
-            animation: playerSlideUp 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        @keyframes playerSlideUp {
-            from { transform: translate(-50%, 100px); opacity: 0; }
-            to { transform: translate(-50%, 0); opacity: 1; }
-        }
-
-        .player-controls {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .play-pause-btn {
-            background: #ffffff;
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #000000;
-            transition: transform 0.2s ease, background-color 0.2s ease;
-        }
-
-        .play-pause-btn:hover {
-            transform: scale(1.06);
-            background: #e6e6e6;
-        }
-
-        .play-pause-btn svg {
-            width: 16px;
-            height: 16px;
-            fill: currentColor;
-        }
-
-        .track-meta {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .track-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: #ffffff;
-            letter-spacing: -0.3px;
-        }
-
-        .track-status {
-            font-size: 11px;
-            color: #8c8c8c;
-            margin-top: 1px;
-        }
-
-        /* Анимированный эквалайзер */
-        .equalizer {
-            display: flex;
-            align-items: flex-end;
-            gap: 3px;
-            width: 18px;
-            height: 16px;
-        }
-
-        .eq-bar {
-            width: 3px;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.7);
-            transform-origin: bottom;
-            animation: bounce 0.6s ease-in-out infinite alternate;
-            animation-play-state: paused; /* По умолчанию стоит на паузе */
-        }
-
-        .equalizer.playing .eq-bar {
-            animation-play-state: running; /* Запускается при игре */
-        }
-
-        .eq-bar:nth-child(1) { animation-duration: 0.4s; }
-        .eq-bar:nth-child(2) { animation-duration: 0.7s; }
-        .eq-bar:nth-child(3) { animation-duration: 0.5s; }
-
-        @keyframes bounce {
-            0% { transform: scaleY(0.1); }
-            100% { transform: scaleY(1); }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="bg-glow"></div>
-    <div class="bg-glow-2"></div>
-
-    <div class="card">
-        <div class="avatar-container">
-            <img src="avatar.png" alt="c4elovek avatar" class="avatar">
-        </div>
-
-        <h1>c4elovek</h1>
-        <div class="username">@c4elovek-cmd</div>
-        
-        <p class="bio">
-            Добро пожаловать на мой личный сайт! Здесь собраны все актуальные ссылки для связи со мной и мои текущие проекты.
-        </p>
-
-        <div class="links-container">
-            <!-- Telegram -->
-            <a href="https://t.me/c4alovek" target="_blank" class="link-item">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.7-2.46 2.75-2.67.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.24-.02-.1.02-1.69 1.07-4.77 3.14-.45.31-.86.46-1.22.45-.4-.01-1.17-.23-1.74-.41-.7-.23-1.25-.35-1.2-.74.03-.2.3-.41.82-.62 3.2-1.39 5.34-2.31 6.42-2.76 3.07-1.28 3.71-1.5 4.13-1.51.09 0 .3.02.44.14.12.1.15.24.16.34.01.06.02.21 0 .34z"/>
-                </svg>
-                Telegram канал / Личка
-            </a>
-
-            <!-- GitHub -->
-            <a href="https://github.com/c4elovek-cmd" target="_blank" class="link-item">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
-                </svg>
-                Мой GitHub профиль
-            </a>
-
-            <!-- Discord -->
-            <a href="https://discord.com" target="_blank" class="link-item">
-                <svg class="icon" viewBox="0 0 24 24">
-                    <path d="M19.27 4.73a11.12 11.12 0 0 0-2.74-1A13.43 13.43 0 0 0 16 4.7a10.7 10.7 0 0 0-3.2 0 13.43 13.43 0 0 0-.53-1 11.12 11.12 0 0 0-2.74 1A11.33 11.33 0 0 0 7.3 18.06a11.75 11.75 0 0 0 3.23 1.63 15.3 15.3 0 0 0 .69-1.12 7.72 7.72 0 0 1-1.12-.53 4.41 4.41 0 0 0 .23-.18 8.16 8.16 0 0 0 3.37.52 8.16 8.16 0 0 0 3.37-.52c.08.06.16.12.23.18a7.72 7.72 0 0 1-1.12-.53 15.3 15.3 0 0 0 .69 1.12 11.75 11.75 0 0 0 3.23-1.63 11.33 11.33 0 0 0-2.22-13.33zM9.07 14.12c-.65 0-1.18-.6-1.18-1.33s.52-1.33 1.18-1.33 1.18.6 1.18 1.33-.52 1.33-1.18 1.33zm5.86 0c-.65 0-1.18-.6-1.18-1.33s.52-1.33 1.18-1.33 1.18.6 1.18 1.33-.53 1.33-1.18 1.33z"/>
-                </svg>
-                Discord: _c4elovek_
-            </a>
-        </div>
-
-        <div class="footer">
-            © 2026 c4elovek.online
-        </div>
-    </div>
-
-    <!-- ТЕГ АУДИО (Грузит твою песню) -->
-    <audio id="bg-music" src="song.mp3" loop></audio>
-
-    <!-- ПАНЕЛЬ КАСТОМНОГО ПЛЕЕРА СНИЗУ ЭКРАНА -->
-    <div class="bottom-player">
-        <div class="player-controls">
-            <button id="play-btn" class="play-pause-btn" title="Play">
-                <!-- Иконка Play (треугольник) -->
-                <svg id="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                <!-- Иконка Pause (две полоски, скрыта изначально) -->
-                <svg id="icon-pause" viewBox="0 0 24 24" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-            </button>
-            <div class="track-meta">
-                <span class="track-name">Solitude</span>
-                <span id="player-status" class="track-status">Кликните</span>
-            </div>
-        </div>
-        
-        <!-- Анимация волны звука -->
-        <div id="eq" class="equalizer">
-            <div class="eq-bar"></div>
-            <div class="eq-bar"></div>
-            <div class="eq-bar"></div>
-        </div>
-    </div>
-
-    <!-- СКРИПТ УПРАВЛЕНИЯ ПЛЕЕРОМ -->
-    <script>
-        const audio = document.getElementById('bg-music');
-        const playBtn = document.getElementById('play-btn');
-        const iconPlay = document.getElementById('icon-play');
-        const iconPause = document.getElementById('icon-pause');
-        const statusText = document.getElementById('player-status');
-        const eq = document.getElementById('eq');
-
-        // Функция переключения воспроизведения
-        function togglePlay() {
-            if (audio.paused) {
-                audio.play().then(() => {
-                    iconPlay.style.display = 'none';
-                    iconPause.style.display = 'block';
-                    statusText.innerText = 'сейчас играет';
-                    eq.classList.add('playing');
-                }).catch(err => {
-                    console.log("Автозапуск заблокирован браузером. Требуется клик.");
-                });
-            } else {
-                audio.pause();
-                iconPlay.style.display = 'block';
-                iconPause.style.display = 'none';
-                statusText.innerText = 'на паузе';
-                eq.classList.remove('playing');
-            }
-        }
-
-        playBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Чтобы не срабатывал клик по body
-            togglePlay();
-        });
-
-        // Обход блокировки звука: клик в любое место экрана запустит песню (однократно)
         window.addEventListener('click', () => {
             if (audio.paused && audio.currentTime === 0) {
                 audio.play().then(() => {
