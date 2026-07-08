@@ -1,3 +1,3 @@
 # site
-Домен был куплен на: namecheap.com
-Сайт: c4elovek.online
+Buyed on: namecheap.com
+Site: c4elovek.online
