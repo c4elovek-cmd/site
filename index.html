@@ -166,6 +166,73 @@
             flex-shrink: 0; 
         }
 
+        /* Выпадающий список (спойлер) */
+        .expand-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Прижимаем к левому краю */
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        .expand-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            outline: none;
+        }
+
+        .expand-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #8c8c8c;
+            transition: transform 0.3s ease;
+        }
+
+        .expand-btn:hover svg {
+            fill: #ffffff;
+        }
+
+        .expand-btn.active svg {
+            transform: rotate(180deg);
+        }
+
+        .expand-content {
+            display: none;
+            align-items: center;
+            margin-top: 8px;
+            padding: 10px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #cccccc;
+            font-size: 14px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .expand-content.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Общие стили для встроенных иконок из файлов */
+        .inline-icon {
+            width: 18px;
+            height: 18px;
+            vertical-align: text-bottom;
+            margin-right: 6px;
+            filter: invert(1) opacity(0.8); /* Делаем иконки белыми для темного фона */
+        }
+
         /* Подвал */
         .footer {
             margin-top: 20px;
@@ -183,11 +250,9 @@
             gap: 20px;
             margin-top: 15px;
             z-index: 2;
-            
-            /* Новая анимация для иконок */
             opacity: 0; 
             animation: iconsAppear 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-            animation-delay: 0.3s; /* Задержка, чтобы они появлялись сразу после рамки */
+            animation-delay: 0.3s;
         }
 
         @keyframes iconsAppear {
@@ -215,7 +280,6 @@
             fill: currentColor;
         }
 
-        /* Специальный класс для фикса новой PNG-иконки Steam */
         .bottom-icon-img {
             width: 30px;
             height: 30px;
@@ -349,16 +413,19 @@
         <h1>c4elovek</h1>
         <div class="username">@c4elovek-cmd</div>
 
+        <!-- Добавлена иконка warning-circle-svgrepo-com.svg -->
         <p class="bio">
+            <img src="warning-circle-svgrepo-com.svg" alt="warning" class="inline-icon">
             Сайт сделан потому что были деньги которые надо было потратить. Здесь собраны все актуальные ссылки для связи со мной и мои текущие проекты.
         </p>
 
         <div class="links-container">
+            <!-- Текст изменен на "Telegram" -->
             <a href="https://t.me/c4alovek" target="_blank" class="link-item">
                 <svg class="icon" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.7-2.46 2.75-2.67.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.24-.02-.1.02-1.69 1.07-4.77 3.14-.45.31-.86.46-1.22.45-.4-.01-1.17-.23-1.74-.41-.7-.23-1.25-.35-1.2-.74.03-.2.3-.41.82-.62 3.2-1.39 5.34-2.31 6.42-2.76 3.07-1.28 3.71-1.5 4.13-1.51.09 0 .3.02.44.14.12.1.15.24.16.34.01.06.02.21 0 .34z"/>
                 </svg>
-                Telegram канал / Личка
+                Telegram
             </a>
 
             <a href="https://github.com/c4elovek-cmd" target="_blank" class="link-item">
@@ -374,6 +441,17 @@
                 </svg>
                 Discord: _c4elovek_
             </a>
+        </div>
+
+        <!-- Добавленный блок с выпадающим списком (стрелочка слева) -->
+        <div class="expand-container">
+            <button id="expand-btn" class="expand-btn" title="Развернуть информацию">
+                <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+            </button>
+            <div id="expand-content" class="expand-content">
+                <img src="info-square-svgrepo-com.svg" alt="info" class="inline-icon">
+                рагнарог
+            </div>
         </div>
 
         <div class="footer">
@@ -458,6 +536,15 @@
                 }).catch(() => {});
             }
         }, { once: true });
+
+        // Скрипт для работы спойлера (разворачивающийся текст)
+        const expandBtn = document.getElementById('expand-btn');
+        const expandContent = document.getElementById('expand-content');
+
+        expandBtn.addEventListener('click', () => {
+            expandBtn.classList.toggle('active');
+            expandContent.classList.toggle('show');
+        });
     </script>
 
 </body>
