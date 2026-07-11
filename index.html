@@ -128,7 +128,7 @@
             margin-bottom: 20px;
         }
 
-        /* Ссылки (только большие кнопки) */
+        /* Ссылки */
         .links-container {
             display: flex;
             flex-direction: column;
@@ -180,8 +180,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px; /* Расстояние между иконками */
-            margin-top: 15px; /* Сделано чуть выше, ближе к рамке */
+            gap: 20px;
+            margin-top: 15px;
             z-index: 2;
         }
 
@@ -190,6 +190,8 @@
             opacity: 0.5;
             transition: all 0.3s ease;
             display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .bottom-icon-link:hover {
@@ -201,6 +203,14 @@
             width: 30px;
             height: 30px;
             fill: currentColor;
+        }
+
+        /* Специальный класс для фикса новой PNG-иконки Steam */
+        .bottom-icon-img {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            filter: invert(1); /* Делает черную PNG-иконку белой */
         }
 
         /* ПЛЕЕР СНИЗУ */
@@ -364,9 +374,8 @@
     <!-- Иконки под рамкой (Steam и SoundCloud) -->
     <div class="bottom-icons">
         <a href="https://steamcommunity.com/id/xxxc4elovekxxx/" target="_blank" class="bottom-icon-link" title="Мой Steam">
-            <svg class="bottom-icon-svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11.979 0C5.362 0 0 5.372 0 12c0 5.05 3.123 9.387 7.575 11.138.077-.146.157-.294.24-.44l3.32-4.773c-.418-.198-.772-.489-1.041-.843l-4.293-1.427c-.29-.63-.443-1.32-.443-2.039 0-2.822 2.288-5.11 5.11-5.11 2.822 0 5.11 2.288 5.11 5.11 0 2.821-2.288 5.11-5.11 5.11-.237 0-.47-.017-.698-.051l-2.64 3.79c.928.326 1.921.503 2.95.503 6.618 0 11.979-5.372 11.979-12S18.597 0 11.979 0zm-4.8 15.093c-.551 1.054-.153 2.378.89 2.929 1.043.551 2.368.152 2.919-.89.55-1.054.152-2.377-.891-2.928-1.043-.551-2.368-.153-2.918.889zm5.385-4.253a2.383 2.383 0 0 0-2.381 2.382c0 1.315 1.066 2.381 2.381 2.381 1.315 0 2.381-1.066 2.381-2.381 0-1.316-1.066-2.382-2.381-2.382zm0 3.784a1.402 1.402 0 1 1 0-2.804 1.402 1.402 0 0 1 0 2.804z"/>
-            </svg>
+            <!-- ИСПОЛЬЗОВАНА НОВАЯ ССЫЛКА НА ИКОНКУ -->
+            <img src="https://img.icons8.ru/fluency-systems-filled/48/steam.png" alt="steam" class="bottom-icon-img"/>
         </a>
         <a href="https://soundcloud.com" target="_blank" class="bottom-icon-link" title="Мой SoundCloud">
             <svg class="bottom-icon-svg" viewBox="0 0 30 30" fill="currentColor">
